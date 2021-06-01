@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>자재</title>
+</head>
+<style>
+	tr {
+	border: 1px solid black;
+}
+
+</style>
+<body>
+	<table border="1" style="border-collapse: collapse; text-align: center;" >
+		<caption>직원</caption>
+		<tr>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>사이즈</th>
+			<th>부서</th>
+		</tr>
+		
+	{% for mat in matlist %}
+		<tr>
+			<td><a href="javascript:showInfo('{{mat[0]}}','{{mat[1]}}','{{mat[2]}}','{{mat[3]}}')">{{mat[0]}}</a></td>
+			<td>{{mat[1]}}</td>
+			<td>{{mat[2]}}</td>
+			<td>{{mat[3]}}</td>
+		</tr>
+	{% endfor %}
+		
+	</table>
+	<br>
+	<table border="1" style="border-collapse: collapse; text-align: center;" id="table_test">
+		<tr>
+			<th>아이디</th>
+			<td><input id="mat_id"></td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td><input id="mat_name"></td>
+		</tr>
+		<tr>
+			<th>사이즈</th>
+			<td><input id="mat_size"></td>
+		</tr>
+		<tr>
+			<th>부서</th>
+			<td><input id="dept"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="추가" onclick="myInsert()">
+				<input type="button" value="수정" onclick="myUpdate()">
+				<input type="button" value="삭제" onclick="myDelete()">
+			</td>
+		</tr>
+	</table>
+
+</body>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+function showInfo(mat_id,mat_name,mat_size,dept,mat_tel){
+	$("#mat_id").val(mat_id);	
+	$("#mat_name").val(mat_name);	
+	$("#mat_size").val(mat_size);	
+	$("#dept").val(dept);	
+}
+
+function myInsert(){
+	var data = {
+			mat_id:$("#mat_id").val(),	
+			mat_name:$("#mat_name").val(),	
+			mat_size:$("#mat_size").val(),	
+			dept:$("#dept").val(),
+	}
+	$.ajax({
+		url:"mat_insert.ajax",
+		data:JSON.stringify(data),
+		dataType:"JSON",
+		contentType:"application/json",
+		type:"post",
+		success:function(data){
+			console.log(data.msg);
+			if(data.msg == 'okay'){
+				location.reload();
+			}else{
+				alert("처리 실패!");
+			}
+		},
+		error:function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+function myUpdate(){
+	var data = {
+			mat_id:$("#mat_id").val(),	
+			mat_name:$("#mat_name").val(),	
+			mat_size:$("#mat_size").val(),	
+			dept:$("#dept").val(),
+	}
+	$.ajax({
+		url:"mat_update.ajax",
+		data:JSON.stringify(data),
+		dataType:"JSON",
+		contentType:"application/json",
+		type:"post",
+		success:function(data){
+			console.log(data.msg);
+			if(data.msg == 'okay'){
+				location.reload();
+			}else{
+				alert("처리 실패!");
+			}
+		},
+		error:function(xhr){
+			console.log(xhr);
+		}
+	})
+	
+}
+function myDelete(){
+	var data = {
+			mat_id:$("#mat_id").val()
+	}
+	$.ajax({
+		url:"mat_delete.ajax",
+		data:JSON.stringify(data),
+		dataType:"JSON",
+		contentType:"application/json",
+		type:"post",
+		success:function(data){
+			console.log(data.msg);
+			if(data.msg == 'okay'){
+				location.reload();
+			}else{
+				alert("처리 실패!");
+			}
+		},
+		error:function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+
+</script>
+</html>

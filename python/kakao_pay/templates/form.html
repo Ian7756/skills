@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>카카오페이</title>
+	
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="/bootstrap/plugins/fontawesome-free/css/all.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="/bootstrap/dist/css/adminlte.min.css">
+	<!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	
+	
+	<style type="text/css">
+		th {
+			text-align: left;
+		}
+		td {
+			text-align: right;
+		}
+	
+	</style>
+	
+	
+</head>
+<body>
+	<div class="container">
+		<div class="content">
+			<div class="card">
+				<div class="card-header">
+					<h2>결제</h2>
+				</div>
+				<div class="card-body">
+					<input type="hidden" name="tax_free_amount" value="200">
+					<input type="hidden" name="vat_amount" value="200">
+					<input type="hidden" name="partner_user_id" value="partner_user_id">
+					<input type="hidden" name="partner_order_id" value="partner_order_id">
+					<table class="table">
+						<tr>
+							<th>상품명</th>
+							<td>
+								<input type="text" name="item_name" checked="checked" disabled="disabled" value="키보드">
+							</td>
+						</tr>
+						<tr>
+							<th style="width:30%;">상품금액</th>
+							<td style="width:70%;">
+								<input type="number" name="total_amount" value="960000" disabled="disabled">
+							</td>
+						</tr>
+						<tr>
+							<th>총수량</th>
+							<td>
+								<input type="number" name="quantity" value="1" disabled="disabled">
+							</td>
+						</tr>
+						<tr>
+							<th>최종 결제금액</th>
+							<td>
+								<input type="text" disabled="disabled" value="960000"/>
+							</td>
+						</tr>
+					</table>
+					<div align="right">
+						<a style="cursor: pointer;" onclick="plz()"><img alt="결제이미지" src="/img/payment_icon_yellow_medium.png"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+
+
+<!-- jQuery -->
+<script src="/js/jquery-3.5.1.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/bootstrap/dist/js/adminlte.min.js"></script>
+<script type="text/javascript">
+
+function plz(){
+	var data = {
+			item_name:$("input[name='item_name']").val(),
+			quantity:$("input[name='quantity']").val(),
+			total_amount:$("input[name='total_amount']").val(),
+			vat_amount:$("input[name='vat_amount']").val(),
+			partner_user_id:$("input[name='partner_user_id']").val(),
+			partner_order_id:$("input[name='partner_order_id']").val(),
+			tax_free_amount:$("input[name='tax_free_amount']").val()
+	}
+	
+	$.ajax({
+		url:"kakaopay",
+		data:JSON.stringify(data),
+		dataType:"JSON",
+		contentType:"application/json",
+		type:"post",
+		success:function(data){
+			location.href = data.next_redirect_pc_url;
+		},
+		error:function(xhr){
+			console.log(xhr);
+		}
+	});
+	
+}
+
+function setSelect(){
+	
+}
+
+
+
+</script>
+</body>
+
+</html>

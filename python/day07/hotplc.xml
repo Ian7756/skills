@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Naver Open API - local ::'대전맛집'</title>
+		<link>https://search.naver.com</link>
+		<description>Naver Search Result</description>
+		<lastBuildDate>Mon, 01 Feb 2021 10:05:42 +0900</lastBuildDate>
+		<total>1</total>
+		<start>1</start>
+		<display>1</display>
+		<item>
+			<title>성심당 본점</title>
+			<link>https://www.sungsimdang.co.kr/</link>
+			<category>카페,디저트&gt;베이커리</category>
+			<description></description>
+			<telephone></telephone>
+			<address>대전광역시 중구 은행동 145</address>
+			<roadAddress>대전광역시 중구 대종로480번길 15</roadAddress>
+			<mapx>348785</mapx>
+			<mapy>414276</mapy>
+		</item>
+	</channel>
+</rss>

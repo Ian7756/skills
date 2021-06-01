@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>오목</title>
+</head>
+<style>
+	tr {
+	border: 1px solid black;
+}
+
+</style>
+<body>
+	<table border="1" style="border-collapse: collapse; text-align: center;">
+		<caption>오목 경기</caption>
+		
+		<tr>
+			<th>판순서</th>
+			<th>상세QR코드</th>
+		</tr>
+		
+	{% for pan in panList %}
+		<tr>
+			<td><a href="javascript:location.href='omock_detail?pan={{pan[0]}}'">{{pan[0]}}</a></td>
+			<td><img alt="" src="gibo/{{pan[0]}}.png"></td>
+		</tr>
+	{% endfor %}
+	</table>
+
+
+</body>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+function showInfo(emp_id,emp_name,emp_gender,emp_addr,emp_tel){
+	$("#emp_id").val(emp_id);	
+	$("#emp_name").val(emp_name);	
+	$("#emp_gender").val(emp_gender);	
+	$("#emp_addr").val(emp_addr);	
+	$("#emp_tel").val(emp_tel);	
+}
+
+function myInsert(){
+	var data = {
+			emp_id:$("#emp_id").val(),	
+			emp_name:$("#emp_name").val(),	
+			emp_gender:$("#emp_gender").val(),	
+			emp_addr:$("#emp_addr").val(),
+			emp_tel:$("#emp_tel").val()
+	}
+	$.ajax({
+		url:"emp_insert.ajax",
+		data:JSON.stringify(data),
+		dataType:"JSON",
+		contentType:"application/json",
+		type:"post",
+		success:function(data){
+			console.log(data.msg);
+			if(data.msg == 'okay'){
+				location.reload();
+			}else{
+				alert("처리 실패!");
+			}
+		},
+		error:function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+function myUpdate(){
+	var data = {
+			emp_id:$("#emp_id").val(),	
+			emp_name:$("#emp_name").val(),	
+			emp_gender:$("#emp_gender").val(),	
+			emp_addr:$("#emp_addr").val(),
+			emp_tel:$("#emp_tel").val()
+	}
+	$.ajax({
+		url:"emp_update.ajax",
+		data:JSON.stringify(data),
+		dataType:"JSON",
+		contentType:"application/json",
+		type:"post",
+		success:function(data){
+			console.log(data.msg);
+			if(data.msg == 'okay'){
+				location.reload();
+			}else{
+				alert("처리 실패!");
+			}
+		},
+		error:function(xhr){
+			console.log(xhr);
+		}
+	})
+	
+}
+function myDelete(){
+	var data = {
+			emp_id:$("#emp_id").val()
+	}
+	$.ajax({
+		url:"emp_delete.ajax",
+		data:JSON.stringify(data),
+		dataType:"JSON",
+		contentType:"application/json",
+		type:"post",
+		success:function(data){
+			console.log(data.msg);
+			if(data.msg == 'okay'){
+				location.reload();
+			}else{
+				alert("처리 실패!");
+			}
+		},
+		error:function(xhr){
+			console.log(xhr);
+		}
+	})
+}
+
+</script>
+</html>

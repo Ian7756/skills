@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>db</title>
+</head>
+<body>
+	<table id="mytable" border="1" style="border-collapse: collapse;">
+			{% for row in mydb %}
+			 <tr>
+			{% for td in row %}
+			 <td>{{td}}</td>
+			{% endfor %}
+			 </tr>
+		{% endfor %}
+	</table>
+</body>
+</html>
