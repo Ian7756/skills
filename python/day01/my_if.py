@@ -6,8 +6,6 @@ elif a > 1 :
     print("크긴하네...")
 else:
     print("와우")
-    
-    
 
 if 1 != 0 :
     print("trus")
